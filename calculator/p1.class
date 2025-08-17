@@ -1,0 +1,78 @@
+// Source code is decompiled from a .class file using FernFlower decompiler.
+import java.util.Scanner;
+
+public class p1 {
+   public p1() {
+   }
+
+   public static void main(String[] var0) {
+      Scanner var1 = new Scanner(System.in);
+      System.out.println("Welcome to the Java CLI Calculator!");
+      System.out.println("Enter an operation in the format: <number> <operator> <number>");
+      System.out.println("Supported operators: +, -, *, /, sin, cos, tan");
+      System.out.println("Note: Trigonometric functions expect input in degrees.");
+      System.out.println("Type 'exit' to quit.");
+
+      while(true) {
+         System.out.print("\n> ");
+         String var2 = var1.nextLine().trim().toLowerCase();
+         if (var2.equals("exit")) {
+            System.out.println("Exiting calculator. Goodbye!");
+            var1.close();
+            return;
+         }
+
+         String[] var3 = var2.split("\\s+");
+
+         try {
+            double var7;
+            if (var3.length == 2) {
+               String var4 = var3[0];
+               double var5 = Double.parseDouble(var3[1]);
+               var7 = Math.toRadians(var5);
+               switch (var4) {
+                  case "sin":
+                     System.out.println("sin(" + var5 + "°) = " + Math.sin(var7));
+                     break;
+                  case "cos":
+                     System.out.println("cos(" + var5 + "°) = " + Math.cos(var7));
+                     break;
+                  case "tan":
+                     System.out.println("tan(" + var5 + "°) = " + Math.tan(var7));
+                     break;
+                  default:
+                     System.out.println("Unsupported function. Use sin, cos, or tan.");
+               }
+            } else if (var3.length == 3) {
+               double var12 = Double.parseDouble(var3[0]);
+               String var6 = var3[1];
+               var7 = Double.parseDouble(var3[2]);
+               switch (var6) {
+                  case "+":
+                     System.out.println("Result: " + (var12 + var7));
+                     break;
+                  case "-":
+                     System.out.println("Result: " + (var12 - var7));
+                     break;
+                  case "*":
+                     System.out.println("Result: " + var12 * var7);
+                     break;
+                  case "/":
+                     if (var7 == 0.0) {
+                        System.out.println("Error: Division by zero.");
+                     } else {
+                        System.out.println("Result: " + var12 / var7);
+                     }
+                     break;
+                  default:
+                     System.out.println("Unsupported operator. Use one of: +, -, *, /");
+               }
+            } else {
+               System.out.println("Invalid input format. Please use: <function> <angle> or <number> <operator> <number>");
+            }
+         } catch (NumberFormatException var11) {
+            System.out.println("Invalid number format. Please enter valid numbers.");
+         }
+      }
+   }
+}
